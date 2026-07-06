@@ -1,0 +1,61 @@
+{% extends "home.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+    <h2>Dashboard</h2>
+
+    <div class="dashboard-cards">
+        <div class="card card-welcome">
+            <div class="card-icon">&#x1f44b;</div>
+            <div class="card-label">Welcome</div>
+            <div class="card-value">{{ current_user.Name }}</div>
+        </div>
+
+        <div class="card card-income">
+            <div class="card-icon">&#x1f4b5;</div>
+            <div class="card-label">Total Income</div>
+            <div class="card-value">&#8377;{{ total_income }}</div>
+        </div>
+
+        <div class="card card-expense">
+            <div class="card-icon">&#x1f4b8;</div>
+            <div class="card-label">Total Expense</div>
+            <div class="card-value">&#8377;{{ total_expense }}</div>
+        </div>
+
+        <div class="card card-balance">
+            <div class="card-icon">&#x1f4b0;</div>
+            <div class="card-label">Current Balance</div>
+            <div class="card-value">&#8377;{{ Balance_amount }}</div>
+        </div>
+    </div>
+
+    <h3>Recent Transactions</h3>
+    {% if recent_transactions %}
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Type</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in recent_transactions %}
+            <tr>
+                <td>{{ t.Date }}</td>
+                <td>&#8377;{{ t.Amount }}</td>
+                <td>{{ t.Type }}</td>
+                <td>{{ t.Category }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No transactions yet. Start by adding your first income or expense!</p>
+    {% endif %}
+
+{% endblock %}

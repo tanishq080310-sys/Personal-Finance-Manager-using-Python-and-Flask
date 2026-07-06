@@ -1,0 +1,20 @@
+{% extends "home.html" %}
+
+{% block content %}
+
+    <h2>Register</h2>
+    <form method = "POST" action = "/register">
+        <lable for = "name">Name:</lable>
+        <input type = "text" name = "name" required><br><br>
+
+        <label for = "email">Email:</label>
+        <input type = "email" name = "email" required><br><br>
+
+        <label for = "password">Password:</label>
+        <input type = "password" name = "password" required><br><br>
+
+        <button type = "submit">Register</button>
+
+        <p>Already have an account? <a href = "/login">Login here</a></p>
+    </form>
+{% endblock %}

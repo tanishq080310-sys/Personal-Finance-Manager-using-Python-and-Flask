@@ -1,0 +1,119 @@
+{% extends "home.html" %}
+{% block content %}
+
+    <h2>Income</h2>
+
+    <h4> Welcome, <span class="user-name">{{ user.Name }}</span>!</h4>
+
+    <h3>Add Income</h3>
+
+    <form method = "POST" action = "/incomes">
+        <label for = "amount">Amount:</label>
+        <input type = "number" name = "amount" required><br><br>
+
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date" required><br><br>
+
+        <label for = "source">Source:</label>
+        <select name="source" required>
+            <option value="">-- Select Source --</option>
+            <option value="Salary">Salary</option>
+            <option value="Freelancing">Freelancing</option>
+            <option value="Business">Business</option>
+            <option value="Bonus">Bonus</option>
+            <option value="Commission">Commission</option>
+            <option value="Overtime">Overtime</option>
+            <option value="Interest">Interest</option>
+            <option value="Dividend">Dividend</option>
+            <option value="Rental Income">Rental Income</option>
+            <option value="Investment">Investment</option>
+            <option value="Scholarship">Scholarship</option>
+            <option value="Pension">Pension</option>
+            <option value="Gift">Gift</option>
+            <option value="Cashback">Cashback</option>
+            <option value="Tax Refund">Tax Refund</option>
+            <option value="Other">Other</option>
+        </select>
+        
+        <br><br>
+        
+        <label for = "payment_method">Payment Method:</label>
+        <select name="payment_method">
+            <option value="">-- Select Payment Method --</option>
+            <option value="Cash">Cash</option>
+            <option value="Bank Transfer">Bank Transfer</option>
+            <option value="UPI">UPI</option>
+            <option value="Cheque">Cheque</option>
+            <option value="Debit Card">Debit Card</option>
+            <option value="Credit Card">Credit Card</option>
+            <option value="Net Banking">Net Banking</option>
+            <option value="PayPal">PayPal</option>
+            <option value="Cryptocurrency">Cryptocurrency</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label for = "description">Description:</label>
+        <input type = "text" name = "description"><br><br>
+
+        <label for = "category">Category:</label>
+        <select name="category">
+            <option value="">-- Select Category --</option>
+
+            <option value="Primary Income">Primary Income</option>
+            <option value="Secondary Income">Secondary Income</option>
+            <option value="Passive Income">Passive Income</option>
+            <option value="Business Income">Business Income</option>
+            <option value="Investment Income">Investment Income</option>
+            <option value="Government Benefits">Government Benefits</option>
+            <option value="Educational">Educational</option>
+            <option value="Family Support">Family Support</option>
+            <option value="Refund">Refund</option>
+            <option value="Miscellaneous">Miscellaneous</option>
+        </select>
+
+        <button type = "submit">Add Income</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Source</th>
+                <th>Payment Method</th>
+                <th>Description</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for income in user.incomes %}
+            <tr>
+                <td>{{income.id}}</td>
+                <td>{{ income.Amount }}</td>
+                <td>{{ income.date }}</td>
+                <td>{{ income.Source }}</td>
+                <td>{{ income.Payment_method }}</td>
+                <td>{{ income.description }}</td>
+                <td>{{ income.Category }}</td>
+                <td>
+                   <form method = "POST" action = "/delete_income/{{ income.id }}">
+                    <button type = "submit">Delete Income</button>
+                   </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+    <div class="total-row">
+        <p class="total-amount">Total Income: <strong>&#8377;{{ total_income }}</strong></p>
+        <form action = "/delete_all_incomes" method = "POST">
+            <button type = "Submit" > Delete All Incomes</button>
+        </form>
+    </div>
+
+
+
+{% endblock %}

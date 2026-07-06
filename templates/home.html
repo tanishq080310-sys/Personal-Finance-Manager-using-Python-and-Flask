@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Finance Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+   <header>
+    <h1>Finance Manager</h1>
+    <div class="nav-links">
+        <span class="nav-group">
+            <a href="/register">Register</a>
+            <a href="/login">Login</a>
+        </span>
+        <span class="nav-divider"></span>
+        <span class="nav-group">
+            <a href="/incomes">Income</a>
+            <a href="/expenses">Expenses</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/history">History</a>
+            <a href="/logout">Logout</a>
+        </span>
+    </div>
+   </header>
+
+    <main>
+     {% block content %}
+         <div class="hero">
+             <h2>Welcome to the Personal Finance Manager!</h2>
+             <p>Take control of your money. Track incomes, manage expenses, and achieve financial freedom.</p>
+             <a href="/register" class="btn-primary">GET STARTED</a>
+         </div>
+     {% endblock %}
+    </main>
+</body>
+</html>

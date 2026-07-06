@@ -1,0 +1,86 @@
+{% extends "home.html" %}
+
+{% block content %}
+
+    <h2>View Your Transaction History</h2>
+
+    <div class="stats-row">
+        <div class="stat-item">
+            <span class="stat-label">Total Transactions</span>
+            <span class="stat-value">{{total_transactions}}</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">Income Transactions</span>
+            <span class="stat-value">{{income_transactions}}</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">Expense Transactions</span>
+            <span class="stat-value">{{expense_transactions}}</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">Maximum Income</span>
+            <span class="stat-value">&#8377;{{max_income}}</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">Maximum Expense</span>
+            <span class="stat-value">&#8377;{{max_expense}}</span>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Type</th>
+            <th>Category</th>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+            <tr>
+                <td>{{transaction.Date}}</td>
+                <td>{{transaction.Amount}}</td>
+                <td>{{transaction.Type}}</td>
+                <td>{{transaction.Category}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3 class="filter-heading">Filter Transactions</h3>
+
+    <form method = "POST" action = "/filter_history">
+         <label for = "Date">Date:</label>
+        <input type = "date" id = "date" name="date">
+
+        <label for = "amount">Amount: </label>
+        <input type = "text" name = "amount" placeholder = "Enter the amount">
+
+        <label for = "type">Type: </label>
+        <select name = "type">
+            <option value="">--Select Type--</option>
+            <option value = "Income">Income</option>
+            <option value = "Expense">Expense</option>
+        </select>
+
+        <button type="submit">Apply filter</button>
+    </form>
+
+    <table>
+        <thead>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Type</th>
+        </thead>
+        <tbody>
+            {% for transaction in filtered_transactions %}
+            <tr>
+                <td>{{transaction.Date}}</td>
+                <td>{{transaction.Amount}}</td>
+                <td>{{transaction.Type}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}
