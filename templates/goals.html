@@ -1,0 +1,109 @@
+{% extends "home.html" %}
+
+{% block content %}
+
+<div class="goals-section">
+    <h2>Your Savings Goals</h2>
+
+    <div class="goals-grid">
+        <form method="POST" action="/goals">
+            <h3>Enter New Goal</h3>
+            <label for="name">Goal Name:</label>
+            <input type="text" name="name" placeholder="e.g. New Laptop" required>
+
+            <label for="target_amount">Target Amount (&#8377;):</label>
+            <input type="number" name="target_amount" placeholder="Enter target amount" required>
+
+            <label for="description">Description:</label>
+            <input type="text" name="description" placeholder="What is this goal for?">
+
+            <label for="deadline">Target Date:</label>
+            <input type="date" id="deadline" name="deadline">
+
+            <button type="submit" name="add_savings">Enter Goal</button>
+        </form>
+
+        <form method="POST" action="/goals">
+            <h3>Add Savings</h3>
+            <label for="deposited_date">Date:</label>
+            <input type="date" name="deposited_date">
+
+            <label for="goal_id">Goal:</label>
+            <select name="goal_id" required>
+                <option value="">---Select Goal---</option>
+                {% for goal in user.goals %}
+                    <option value="{{ goal.id }}">{{ goal.name }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="goal_amount">Amount (&#8377;):</label>
+            <input type="number" name="goal_amount" placeholder="Enter amount to save">
+
+            <label for="note">Note:</label>
+            <input type="text" name="note" placeholder="Add a note">
+
+            <button type="submit" name="add_savings">Add Savings</button>
+        </form>
+    </div>
+</div>
+
+<div class="goals-section">
+    <h2>Your Goals</h2>
+
+    {% if user.goals %}
+    <div class="goal-card-grid">
+        {% for goal in user.goals %}
+        {% set saved = goal_totals.get(goal.id, 0) %}
+        {% set percent = (saved / goal.target_amount * 100) if goal.target_amount > 0 else 0 %}
+        {% if percent > 100 %}{% set percent = 100 %}{% endif %}
+        <div class="goal-progress-card">
+            <div class="goal-progress-header">
+                <span class="goal-progress-name">{{ goal.name }}</span>
+                <span class="goal-progress-target">Target: &#8377;{{ "{:,.0f}".format(goal.target_amount) }}</span>
+            </div>
+            <div class="goal-progress-bar">
+                <div class="goal-progress-fill" style="width: {{ percent }}%"></div>
+            </div>
+            <div class="goal-progress-stats">
+                <span class="goal-saved">&#8377;{{ "{:,.0f}".format(saved) }}</span>
+                <span class="goal-progress-percent">{{ "{:.0f}".format(percent) }}%</span>
+            </div>
+            {% if goal.description %}
+            <div class="goal-description">{{ goal.description }}</div>
+            {% endif %}
+            <div class="goal-progress-meta">
+                <span class="goal-deadline">Deadline: {{ goal.deadline }}</span>
+                <span class="goal-deadline">Created: {{ goal.created_at }}</span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>Goal</th>
+                <th>Target Amount</th>
+                <th>Description</th>
+                <th>Date Created</th>
+                <th>Deadline</th>
+                <th>Amount Saved</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for goal in user.goals %}
+            <tr>
+                <td>{{ goal.name }}</td>
+                <td>&#8377;{{ "{:,.0f}".format(goal.target_amount) }}</td>
+                <td>{{ goal.description or "-" }}</td>
+                <td>{{ goal.created_at }}</td>
+                <td>{{ goal.deadline }}</td>
+                <td>&#8377;{{ "{:,.0f}".format(goal_totals.get(goal.id, 0)) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
