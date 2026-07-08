@@ -13,6 +13,7 @@ A web-based finance manager built using Flask, SQLAlchemy and MySQL.
 - Dashboard
 - MySQL Database
 - Goals Tracking
+- Savings History Feature
 
 ## Technologies
 
