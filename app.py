@@ -151,6 +151,14 @@ def dashboard():
         })
     transactions.sort(key=lambda x: x["Date"], reverse=True)
     recent_transactions = transactions[:3]
+
+    savings = Savings.query.filter_by(user_id = current_user.id).all()
+    total_saving = 0
+    for saving in savings:
+        total_saving += saving.amount
+
+    Balance_amount = total_income - total_expense - total_saving
+
     
     return render_template("dashboard.html",
         user = current_user, 
@@ -159,7 +167,9 @@ def dashboard():
         total_expense = total_expense, 
         expenses = expenses, 
         Balance_amount = Balance_amount,
-        recent_transactions = recent_transactions
+        recent_transactions = recent_transactions,
+        savings = savings,
+        total_saving = total_saving
     )
 
 
@@ -253,7 +263,24 @@ def history():
             expense_transactions += 1
 
 
-    filtered_transactions = []        
+    filtered_transactions = []
+
+    history_savings = []
+
+    savings = Savings.query.filter_by(user_id = current_user.id).all()
+    
+    for saving in savings:
+        goal_name = saving.goal_id
+        goals = Goals.query.get(goal_name)
+        goalname = goals.name
+
+        history_savings.append({
+            "Date": saving.date,
+            "Amount": saving.amount,
+            "Note" : saving.note,
+            "Goal_Name" : goalname
+        })
+
 
 
     if request.method == "POST":
@@ -261,8 +288,6 @@ def history():
         date = request.form.get("date")
         amount = request.form.get("amount")
         type = request.form.get("type")
-
-    
 
         if date:
             date = datetime.strptime(date, "%Y-%m-%d").date()
@@ -291,7 +316,9 @@ def history():
         expense_transactions = expense_transactions,
         max_income = max_income,
         max_expense = max_expense,
-        filtered_transactions = filtered_transactions
+        filtered_transactions = filtered_transactions,
+        user = current_user,
+        history_savings = history_savings
     )
 
 

@@ -29,10 +29,12 @@
 
     <table>
         <thead>
-            <th>Date</th>
-            <th>Amount</th>
-            <th>Type</th>
-            <th>Category</th>
+            <tr>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Type</th>
+                <th>Category</th>
+            </tr>
         </thead>
         <tbody>
             {% for transaction in transactions %}
@@ -48,6 +50,7 @@
 
     <h3 class="filter-heading">Filter Transactions</h3>
 
+    <div class="filter-section">
     <form method = "POST" action = "/filter_history">
          <label for = "Date">Date:</label>
         <input type = "date" id = "date" name="date">
@@ -64,12 +67,15 @@
 
         <button type="submit">Apply filter</button>
     </form>
+    </div>
 
     <table>
         <thead>
-            <th>Date</th>
-            <th>Amount</th>
-            <th>Type</th>
+            <tr>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Type</th>
+            </tr>
         </thead>
         <tbody>
             {% for transaction in filtered_transactions %}
@@ -77,6 +83,30 @@
                 <td>{{transaction.Date}}</td>
                 <td>{{transaction.Amount}}</td>
                 <td>{{transaction.Type}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>View Your Savings History</h2>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Goal Name</th>
+                <th>Amount</th>
+                <th>Note</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for saving in history_savings %}
+            <tr>
+                <td>{{saving.Date}}</td>
+                <td>{{saving.Goal_Name}}</td>
+                <td>{{saving.Amount}}</td>
+                <td>{{saving.Note}}</td>
             </tr>
             {% endfor %}
         </tbody>

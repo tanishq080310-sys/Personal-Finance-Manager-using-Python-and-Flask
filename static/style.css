@@ -358,6 +358,14 @@ table button:hover {
     color: #ffd700;
 }
 
+.card.card-savings {
+    border-left: 3px solid #a855f7;
+}
+
+.card.card-savings .card-value {
+    color: #a855f7;
+}
+
 .card.card-welcome {
     border-left: 3px solid #7b2ff7;
 }

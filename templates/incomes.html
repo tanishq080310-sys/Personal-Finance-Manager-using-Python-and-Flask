@@ -9,10 +9,10 @@
 
     <form method = "POST" action = "/incomes">
         <label for = "amount">Amount:</label>
-        <input type = "number" name = "amount" required><br><br>
+        <input type = "number" name = "amount" required>
 
         <label for="date">Date</label>
-        <input type="date" id="date" name="date" required><br><br>
+        <input type="date" id="date" name="date" required>
 
         <label for = "source">Source:</label>
         <select name="source" required>
@@ -34,9 +34,7 @@
             <option value="Tax Refund">Tax Refund</option>
             <option value="Other">Other</option>
         </select>
-        
-        <br><br>
-        
+
         <label for = "payment_method">Payment Method:</label>
         <select name="payment_method">
             <option value="">-- Select Payment Method --</option>
@@ -53,7 +51,7 @@
         </select>
 
         <label for = "description">Description:</label>
-        <input type = "text" name = "description"><br><br>
+        <input type = "text" name = "description">
 
         <label for = "category">Category:</label>
         <select name="category">
@@ -84,6 +82,7 @@
                 <th>Payment Method</th>
                 <th>Description</th>
                 <th>Category</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
