@@ -6,7 +6,7 @@
     <h2>Your Savings Goals</h2>
 
     <div class="goals-grid">
-        <form method="POST" action="/goals">
+        <form method="POST" action="{{url_for('goals.goals')}}">
             <h3>Enter New Goal</h3>
             <label for="name">Goal Name:</label>
             <input type="text" name="name" placeholder="e.g. New Laptop" required>
@@ -23,7 +23,7 @@
             <button type="submit" name="add_savings">Add Goal</button>
         </form>
 
-        <form method="POST" action="/goals">
+        <form method="POST" action="{{url_for('goals.goals')}}">
             <h3>Add Savings</h3>
             <label for="deposited_date">Date:</label>
             <input type="date" name="deposited_date">

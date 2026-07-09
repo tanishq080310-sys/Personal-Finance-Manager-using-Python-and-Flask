@@ -51,7 +51,7 @@
     <h3 class="filter-heading">Filter Transactions</h3>
 
     <div class="filter-section">
-    <form method = "POST" action = "/filter_history">
+    <form method = "POST" action = "{{url_for('history.history')}}">
          <label for = "Date">Date:</label>
         <input type = "date" id = "date" name="date">
 

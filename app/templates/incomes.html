@@ -7,7 +7,7 @@
 
     <h3>Add Income</h3>
 
-    <form method = "POST" action = "/incomes">
+    <form method = "POST" action = "{{url_for('income.incomes')}}">
         <label for = "amount">Amount:</label>
         <input type = "number" name = "amount" required>
 
@@ -96,7 +96,7 @@
                 <td>{{ income.description }}</td>
                 <td>{{ income.Category }}</td>
                 <td>
-                   <form method = "POST" action = "/delete_income/{{ income.id }}">
+                   <form method = "POST" action = "{{url_for('income.delete_income', income_id = income.id)}}">
                     <button type = "submit">Delete Income</button>
                    </form>
                 </td>
@@ -108,7 +108,7 @@
 
     <div class="total-row">
         <p class="total-amount">Total Income: <strong>&#8377;{{ total_income }}</strong></p>
-        <form action = "/delete_all_incomes" method = "POST">
+        <form action = "{{url_for('income.delete_all_incomes')}}" method = "POST">
             <button type = "Submit" > Delete All Incomes</button>
         </form>
     </div>

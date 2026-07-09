@@ -6,7 +6,7 @@
     <h3>Add your expenses</h3>
     <h4>Welcome <span class="user-name">{{user.Name}}</span>!</h4>
 
-    <form method = "POST" action = "/expenses">
+    <form method = "POST" action = "{{url_for('expense.expenses')}}">
         <label for = "amount">Amount:</label>
         <input type = "number" name = "amount" required>
 
@@ -76,7 +76,7 @@
                 <td>{{ expense.payment_method }}</td>
                 <td>{{ expense.description }}</td>
                 <td>
-                    <form method = "POST" action = "/delete_expense/{{ expense.id }}">
+                    <form method = "POST" action = "{{url_for('expense.delete_expense', expense_id = expense.id)}}">
                         <button type = "submit">Delete</button>
                     </form>
                 </td>
@@ -88,7 +88,7 @@
 
     <div class="total-row">
         <p class="total-amount">Total Expenses: <strong>&#8377;{{total_expense}}</strong></p>
-        <form action = "/delete_all_expenses" method = "POST">
+        <form action = "{{url_for('expense.delete_all_expenses')}}" method = "POST">
             <button type = "submit">Delete All Expenses</button>
         </form>
     </div>

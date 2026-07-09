@@ -14,17 +14,17 @@
     <h1>Finance Manager</h1>
     <div class="nav-links">
         <span class="nav-group">
-            <a href="/register">Register</a>
-            <a href="/login">Login</a>
+            <a href="{{url_for('auth.register')}}">Register</a>
+            <a href="{{ url_for('auth.login') }}">Login</a>
         </span>
         <span class="nav-divider"></span>
         <span class="nav-group">
-            <a href="/incomes">Income</a>
-            <a href="/expenses">Expenses</a>
-            <a href="/dashboard">Dashboard</a>
-            <a href="/history">History</a>
-            <a href="/logout">Logout</a>
-            <a href="/goals">Goals</a>
+            <a href="{{url_for('income.incomes')}}">Income</a>
+            <a href="{{url_for('expense.expenses')}}">Expenses</a>
+            <a href="{{url_for('dashboard.dashboard')}}">Dashboard</a>
+            <a href="{{url_for('history.history')}}">History</a>
+            <a href="{{url_for('goals.goals')}}">Goals</a>
+            <a href="{{url_for('auth.logout')}}">Logout</a>
         </span>
     </div>
    </header>
@@ -34,7 +34,7 @@
          <div class="hero">
              <h2>Welcome to the Personal Finance Manager!</h2>
              <p>Take control of your money. Track incomes, manage expenses, and achieve financial freedom.</p>
-             <a href="/register" class="btn-primary">GET STARTED</a>
+             <a href="{{url_for('auth.register')}}" class="btn-primary">GET STARTED</a>
          </div>
      {% endblock %}
     </main>
