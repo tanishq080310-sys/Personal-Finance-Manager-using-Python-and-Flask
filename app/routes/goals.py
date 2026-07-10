@@ -38,6 +38,21 @@ def goals():
             saving.amount for saving in goal.goal_savings
         )
 
+    goals = Goals.query.filter_by(user_id = current_user.id).all()
+    savings = Savings.query.filter_by(user_id = current_user.id).all()
+    for Goal in goals:
+        goal_total = 0 
+        goalid = Goal.id
+        for saving in savings:
+            if goalid == saving.goal_id:
+                goal_total += saving.amount
+        Goal.current_amount = goal_total
+    
+    db.session.commit()
+
+
+        
+
     return render_template("goals.html",
         user = current_user,
         goal_totals = goal_totals

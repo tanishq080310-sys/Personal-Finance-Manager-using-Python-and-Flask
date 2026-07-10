@@ -64,8 +64,116 @@
     <p>No transactions yet. Start by adding your first income or expense!</p>
     {% endif %}
 
-    <form action = "/ai_summary" method ="POST">
-        <button type="submit">Analyze With AI</button>
-    </form>
+   <form action = "{{url_for('dashboard.dashboard')}}" method = "POST">
+        <button type="submit" name = "generate_ai">
+            Analyze with AI
+        </button>
+   </form>
+
+   {% if btn_clicked == "True" %}
+
+   <div class="summary">
+        <h3>AI Summary</h3>
+
+        {% if error %}
+        <div class="summary-error">
+            <p>⚠️ {{ error }}</p>
+        </div>
+        {% endif %}
+
+        <div class="summary-section section-health">
+            <h4>Financial Health</h4>
+            <div class="summary-stat">
+                <span class="summary-label">Status:</span>
+                <span class="summary-value">{{status}}</span>
+            </div>
+            <div class="summary-stat">
+                <span class="summary-label">Score:</span>
+                <span class="summary-value">{{score}}</span>
+            </div>
+            <div class="summary-stat">
+                <span class="summary-label">Summary:</span>
+                <span class="summary-value">{{summary_health}}</span>
+            </div>
+        </div>
+
+        <div class="summary-section section-overview">
+            <h4>Overview</h4>
+            <div class="summary-stat">
+                <span class="summary-label">Total Income:</span>
+                <span class="summary-value">&#8377;{{total_income}}</span>
+            </div>
+            <div class="summary-stat">
+                <span class="summary-label">Total Expense:</span>
+                <span class="summary-value">&#8377;{{total_expense}}</span>
+            </div>
+            <div class="summary-stat">
+                <span class="summary-label">Total Saving:</span>
+                <span class="summary-value">&#8377;{{total_saving}}</span>
+            </div>
+        </div>
+
+        <div class="summary-section section-expense">
+            <h4>Expense Analysis</h4>
+            <div class="summary-stat">
+                <span class="summary-label">Highest Category:</span>
+                <span class="summary-value">{{highest_category}}</span>
+            </div>
+            <div class="summary-stat">
+                <span class="summary-label">Highest Category Amount:</span>
+                <span class="summary-value">&#8377;{{highest_category_amount}}</span>
+            </div>
+            <div class="summary-stat">
+                <span class="summary-label">Category Breakdown:</span>
+                <span class="summary-value">{{category_breakdown}}</span>
+            </div>
+        </div>
+
+        <div class="summary-section section-goals">
+            <h4>Goal Progress</h4>
+            <div class="summary-stat">
+                <span class="summary-label">Goal Name:</span>
+                <span class="summary-value">{{Goal_name}}</span>
+            </div>
+            <div class="summary-stat">
+                <span class="summary-label">Target Amount:</span>
+                <span class="summary-value">&#8377;{{Target_amount}}</span>
+            </div>
+            <div class="summary-stat">
+                <span class="summary-label">Current Amount:</span>
+                <span class="summary-value">&#8377;{{Current_amount}}</span>
+            </div>
+            <div class="summary-stat">
+                <span class="summary-label">Completion:</span>
+                <span class="summary-value">{{completion_percentage}}%</span>
+            </div>
+            <div class="summary-stat">
+                <span class="summary-label">Status:</span>
+                <span class="summary-value">{{Goal_status}}</span>
+            </div>
+        </div>
+
+        <div class="summary-section section-observations">
+            <h4>Observations</h4>
+            <p class="summary-text">{{observation}}</p>
+        </div>
+
+        <div class="summary-section section-recommendation">
+            <h4>Recommendation</h4>
+            <p class="summary-text">{{recommendation}}</p>
+        </div>
+
+        <div class="summary-section section-final">
+            <h4>Summary</h4>
+            <p class="summary-text">{{summary_ai}}</p>
+        </div>
+
+   </div>
+
+        
+
+   {% endif %}
+
+
 
 {% endblock %}
